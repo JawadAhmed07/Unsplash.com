@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Box, Button, CircularProgress, colors, IconButton, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, colors, IconButton, Modal, TextField, Typography } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { BorderOuterSharp, Javascript, SearchOutlined } from '@mui/icons-material'
 import Header from './components/Header'
@@ -11,6 +11,8 @@ function App() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [showModal, setShowmodal] = useState(false);
+  const [isChosen, setIschosen] = useState(null);
 
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function App() {
       )
         .then((res) => res.json())
         .then((res) => {
-          console.log("search ka response: " , res)
+          console.log("search ka response: ", res)
           setImages(res.results)
           setLoading(false)
         }
@@ -46,6 +48,38 @@ function App() {
   return (
     <>
       <div>
+        <Modal
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          open={showModal}
+          onClose={() => setShowmodal(false)}>
+          <Box 
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            bgcolor:'orange'
+          }}
+          >
+            <img
+            height={200}
+            width={"50%"}
+            
+            src={isChosen?.urls?.regular}/>
+          <Box 
+          width={"100%"} 
+          height={"50%"} 
+          bgcolor={'white'}
+           >
+            <h1>Hello</h1>
+          </Box>
+          </Box>
+
+          
+        </Modal>
         <Header />
         <div className='m-2 mx-5'>
           <Box display={"flex"} gap={2}
@@ -88,7 +122,12 @@ function App() {
           >
             {
               images.map((item) => (
-                <img key={item.id} src={item.urls.regular} />
+                <img
+                  onClick={() => {
+                    setShowmodal(true)
+                    setIschosen(item)
+                  }}
+                  key={item.id} src={item.urls.regular} />
               ))}
           </Masonry>
         </div>
