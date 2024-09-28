@@ -49,36 +49,38 @@ function App() {
     <>
       <div>
         <Modal
+          height={200}
           sx={{
             display: "flex",
             justifyContent: "center",
+            width: "80%",
             alignItems: "center",
+            alignSelf:"center"
           }}
           open={showModal}
           onClose={() => setShowmodal(false)}>
-          <Box 
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            bgcolor:'orange'
-          }}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              // alignItems: "center",
+            }}
           >
             <img
-            height={200}
-            width={"50%"}
-            
-            src={isChosen?.urls?.regular}/>
-          <Box 
-          width={"100%"} 
-          height={"50%"} 
-          bgcolor={'white'}
-           >
-            <h1>Hello</h1>
-          </Box>
+              height={200}
+              width={500}
+              className='contain'
+              src={isChosen?.urls?.regular} />
+            <Box
+              // width={"100%"}
+              display={"block"}
+              bgcolor={'white'}
+            >
+              <Typography fontWeight={"bold"} width={"50%"} padding={2} variant='h4'>{isChosen?.alt_description}</Typography>
+            </Box>
           </Box>
 
-          
+
         </Modal>
         <Header />
         <div className='m-2 mx-5'>
