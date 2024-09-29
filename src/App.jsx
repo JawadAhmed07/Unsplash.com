@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Box, Button, CircularProgress, colors, IconButton, Modal, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, CircularProgress, colors, IconButton, Modal, TextField, Typography } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { BorderOuterSharp, Javascript, SearchOutlined } from '@mui/icons-material'
 import Header from './components/Header'
@@ -49,13 +49,13 @@ function App() {
     <>
       <div>
         <Modal
-          height={200}
+          // height={200}
           sx={{
             display: "flex",
             justifyContent: "center",
-            width: "80%",
+            // width: "80%",
             alignItems: "center",
-            alignSelf:"center"
+            // alignSelf:"center"
           }}
           open={showModal}
           onClose={() => setShowmodal(false)}>
@@ -63,27 +63,52 @@ function App() {
             sx={{
               display: "flex",
               justifyContent: "center",
+              width: "80%"
               // alignItems: "center",
             }}
           >
             <img
-              height={200}
-              width={500}
+              width={"50%"}
+              style={{
+                maxHeight: 700,
+              }}
               className='contain'
               src={isChosen?.urls?.regular} />
             <Box
               // width={"100%"}
               display={"block"}
+              padding={2}
+              width={"50%"}
               bgcolor={'white'}
             >
-              <Typography fontWeight={"bold"} width={"50%"} padding={2} variant='h4'>{isChosen?.alt_description}</Typography>
+              <Typography fontWeight={"medium"} paddingTop={2} variant='h4'>{isChosen?.alt_description}</Typography>
+              <Box display={"flex"} gap={2} paddingTop={2} >
+                <Avatar
+                  src={isChosen?.sponsorship?.sponsor?.profile_image.medium|| isChosen?.user.profile_image?.medium}
+                />
+                <Box >
+                  <Typography>UserName:{isChosen?.sponsorship?.sponsor?.name|| isChosen?.user?.name}</Typography>
+                  <Typography>Total photos:{isChosen?.sponsorship?.sponsor?.total_photos||isChosen?.total_photos}</Typography>
+                </Box>
+              </Box>
+
+
+              <Typography fontWeight={"light"}
+                paddingTop={2}
+                variant='h6'>Total Likes: {isChosen?.likes}</Typography>
+
+              {/* <Typography fontWeight={"light"} 
+              paddingTop={2}
+              variant='h6'>Update at= {isChosen?.updated_at}</Typography> */}
+
+
             </Box>
           </Box>
 
 
         </Modal>
         <Header />
-        <div className='m-2 mx-5'>
+        <div className='m-2  container mx-auto'>
           <Box display={"flex"} gap={2}
             marginTop={2}
             marginBottom={2}
@@ -125,6 +150,7 @@ function App() {
             {
               images.map((item) => (
                 <img
+                className='hover:cursor-pointer'
                   onClick={() => {
                     setShowmodal(true)
                     setIschosen(item)
