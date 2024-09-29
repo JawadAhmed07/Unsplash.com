@@ -88,7 +88,7 @@ function App() {
                 />
                 <Box >
                   <Typography>UserName:{isChosen?.sponsorship?.sponsor?.name|| isChosen?.user?.name}</Typography>
-                  <Typography>Total photos:{isChosen?.sponsorship?.sponsor?.total_photos||isChosen?.total_photos}</Typography>
+                  <Typography>Total photos:{isChosen?.sponsorship?.sponsor?.total_photos||isChosen?.user?.total_photos}</Typography>
                 </Box>
               </Box>
 
